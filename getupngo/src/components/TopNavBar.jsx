@@ -17,6 +17,7 @@ const NavBarItems = [
     label: "Pricing",
     icon: "pi pi-dollar",
     style: { fontFamily: "Gotham Light", fontSize: "20px" },
+    url: "/pricing",
   },
   {
     label: "Find a bike",
@@ -31,7 +32,8 @@ const TopNavBar = () => {
       <Menubar
         style={{
           padding: "15px",
-          boxShadow: "1px 5px 12px #131326",
+          width: "100%",
+          borderRadius: "0%",
         }}
         model={NavBarItems}
         start={

@@ -1,7 +1,12 @@
 import React from "react";
 import TopNavBar from "../components/TopNavBar";
-import StephAve from "../images/StephAve.jpg";
-import { bgImg, imgOnTextStyle, h1ImgStyle, h3ImgStyle } from "./HomePage.jsx";
+import Eaton from "../images/eaton.jpg";
+import {
+  bgImg,
+  imgOnTextStyle,
+  h1ImgStyle,
+  h3ImgStyle,
+} from "../components/BgText";
 import Step1 from "../images/Step1.jpg";
 import Step2 from "../images/Step2.jpg";
 import Step3 from "../images/Step3.jpg";
@@ -13,6 +18,7 @@ const stepsStyle = {
   marginLeft: "50px",
   marginRight: "50px",
 };
+export { stepsStyle };
 
 const steps = [
   {
@@ -21,7 +27,8 @@ const steps = [
     alt: "Credit Card Icon",
     title: "Purchase",
     description: "Purchase a membership or use a guest pass",
-    link: "Purchase a pass or membership",
+    linkText: "See prices",
+    linkTo: "/pricing",
   },
   {
     key: 2,
@@ -30,6 +37,8 @@ const steps = [
     title: "Pick Station",
     description:
       "Pick a station closest to your location and enter the passcode given after your purchase to unlock the bike",
+    linkText: "See available stations",
+    linkTo: "/stations",
   },
   {
     key: 3,
@@ -38,6 +47,8 @@ const steps = [
     title: "Ride",
     description:
       "This is where the fun begins, once unlocked you can hop on and ride along!",
+    linkText: "View popular trails",
+    linkTo: "/trails",
   },
   {
     key: 4,
@@ -46,6 +57,8 @@ const steps = [
     title: "Return",
     description:
       "When your time is up, return the bike at any station closest to you.",
+    linkText: "See prices",
+    linkTo: "/pricing",
   },
 ];
 
@@ -60,7 +73,7 @@ export default function HowItWorks() {
         style={{ position: "relative", textAlign: "center" }}
       >
         <img
-          src={StephAve}
+          src={Eaton}
           alt="Stephen Ave in Calgary"
           style={{ ...bgImg, height: "670px", filter: "brightness(40%)" }}
         />
@@ -70,13 +83,13 @@ export default function HowItWorks() {
           </h1>
           <h3 style={h3ImgStyle}>
             You can pick up a bike at any rental station closest to your
-            location in the city!
+            location in Toronto!
           </h3>
         </div>
       </section>
       <div className="outside-Steps">
         <h1 style={{ marginTop: "40px", fontFamily: "Gotham" }}>
-          Renting a bike is as easy as 1, 2, 3, 4
+          Renting a bike is as easy as 1, 2, 3 (and 4)!
         </h1>
         <div className="rentsteps" style={{ marginTop: "30px" }}>
           {steps.map((step) => (
@@ -87,7 +100,7 @@ export default function HowItWorks() {
                 verticalAlign: "top",
                 display: "inline-block",
                 textAlign: "center",
-                width: "25%",
+                width: "23%",
               }}
             >
               <img src={step.img} alt={step.alt} style={stepsStyle} />

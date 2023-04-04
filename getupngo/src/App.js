@@ -7,6 +7,7 @@ import "primereact/resources/themes/lara-light-teal/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 import HowItWorks from "./pages/HowItWorks";
+import Pricing from "./pages/Pricing";
 
 function App() {
   /** ROUTES RENDER THE COMPONENT IN ELEMENT, IF THE PATH URL ATTRIBUTE MATCHES. */
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/howitworks" element={<HowItWorks />} />
+        <Route path="/pricing" element={<Pricing />} />
       </Routes>
     </div>
   );
