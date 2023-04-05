@@ -9,14 +9,15 @@ export default function HomePage() {
       <div className="nav-bar">
         <TopNavBar />
       </div>
-      <BackgText
-        bgimg={Toronto}
-        bgalt="Toronto Skyline at night"
-        includeButtons={true}
-        TitleText="Grab Toronto by the handlebars"
-        TitleSub="Immerse yourself in the noise of the Scotiabank Arena, the glow of the CN Tower to the neon of Nathan Phillips Square."
-      />
-      {/** REGISTER AND GUEST BUTTONS */}
+      <div className="bgimg">
+        <BackgText
+          bgimg={Toronto}
+          bgalt="Toronto Skyline at night"
+          includeButtons={true}
+          TitleText="Grab Toronto by the handlebars"
+          TitleSub="Immerse yourself in the noise of the Scotiabank Arena, the glow of the CN Tower to the neon of Nathan Phillips Square."
+        />
+      </div>
     </React.Fragment>
   );
 }

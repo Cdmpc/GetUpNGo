@@ -12,6 +12,7 @@ import Step1 from "../images/Step1.jpg";
 import Step2 from "../images/Step2.jpg";
 import Step3 from "../images/Step3.jpg";
 import Step4 from "../images/Step4.jpg";
+import { Margin } from "@mui/icons-material";
 
 const stepsStyle = {
   width: "200px",
@@ -78,47 +79,42 @@ export default function HowItWorks() {
           TitleSub="Feel the wind in your hair as you pedal and soak in the lights. All you need is a helmet and the will to ride!"
         />
       </div>
-      <div className="outside-Steps">
-        <h1 style={{ marginTop: "40px", fontFamily: "Gotham" }}>
-          Renting a bike is as easy as 1, 2, 3 (and 4)!
-        </h1>
-        <div className="rentsteps" style={{ marginTop: "30px" }}>
-          {steps.map((step) => (
-            <figure
-              key={step.key}
-              className="steps"
+      <h1 style={{ marginTop: "40px", fontFamily: "Gotham" }}>
+        Renting a bike is as easy as 1, 2, 3 (and 4)!
+      </h1>
+      <div className="rent-steps" style={{ marginTop: "30px" }}>
+        {steps.map((step) => (
+          <figure
+            key={step.key}
+            className="steps"
+            /** THIS CENTERS TEXT UNDER THE IMAGE AND MAKES IT WRAP IF THE WINDOW SIZE DECREASES */
+            style={{
+              verticalAlign: "top",
+              display: "inline-block",
+              width: "300px",
+            }}
+          >
+            <img src={step.img} alt={step.alt} style={stepsStyle} />
+            <figcaption
+              className="captionTitle"
               style={{
-                verticalAlign: "top",
-                display: "inline-block",
-                textAlign: "center",
-                width: "23%",
+                fontFamily: "Gotham",
+                fontSize: "40px",
+                fontWeight: "500",
               }}
             >
-              <img src={step.img} alt={step.alt} style={stepsStyle} />
-              <figcaption
-                className="captionTitle"
-                style={{
-                  display: "block",
-                  fontFamily: "Gotham",
-                  fontSize: "40px",
-                  fontWeight: "500",
-                }}
-              >
-                {step.title}
-              </figcaption>
-              <figcaption
-                className="captionDesc"
-                style={{
-                  display: "block",
-                  fontFamily: "Gotham Light",
-                  marginTop: "12px",
-                }}
-              >
-                {step.description}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+              {step.title}
+            </figcaption>
+            <figcaption
+              className="captionDesc"
+              style={{
+                fontFamily: "Gotham Light",
+              }}
+            >
+              {step.description}
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </React.Fragment>
   );
