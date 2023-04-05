@@ -1,6 +1,12 @@
 # GETUP'N'GO
 
 This project is a bike rental simulation created with React, and Node.js using the MySQL database hosted on XAMPP.
+Make sure you have the latest dependencies installed on React and also install BootStrap CSS:
+
+```
+npm install
+npm i bootstrap@4.1.1
+```
 
 This project uses the UI Library PrimeReact which can be found here:
 
