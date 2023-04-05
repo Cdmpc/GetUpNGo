@@ -1,6 +1,7 @@
 import React from "react";
 import TopNavBar from "../components/TopNavBar";
 import Eaton from "../images/eaton.jpg";
+import BackgText from "../components/BgText";
 import {
   bgImg,
   imgOnTextStyle,
@@ -68,25 +69,15 @@ export default function HowItWorks() {
       <div className="nav-bar">
         <TopNavBar />
       </div>
-      <section
-        className="background-img"
-        style={{ position: "relative", textAlign: "center" }}
-      >
-        <img
-          src={Eaton}
-          alt="Stephen Ave in Calgary"
-          style={{ ...bgImg, height: "670px", filter: "brightness(40%)" }}
+      <div className="bgtext">
+        <BackgText
+          bgimg={Eaton}
+          bgalt="Eaton Centre from Toronto"
+          includeButtons={false}
+          TitleText="Exhilaration is only a hop skip and pedal away"
+          TitleSub="Feel the wind in your hair as you pedal and soak in the lights. All you need is a helmet and the will to ride!"
         />
-        <div className="text-on-img" style={imgOnTextStyle}>
-          <h1 style={h1ImgStyle}>
-            Exhilaration is just a hop, skip and a pedal away
-          </h1>
-          <h3 style={h3ImgStyle}>
-            You can pick up a bike at any rental station closest to your
-            location in Toronto!
-          </h3>
-        </div>
-      </section>
+      </div>
       <div className="outside-Steps">
         <h1 style={{ marginTop: "40px", fontFamily: "Gotham" }}>
           Renting a bike is as easy as 1, 2, 3 (and 4)!

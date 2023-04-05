@@ -41,9 +41,9 @@ const TopNavBar = () => {
             <img
               src={GGLogo}
               alt="Bike and GetUp'N'Go Text underneath"
-              height={100}
-              width={160}
-              style={{ padding: "5px", marginLeft: "20px" }}
+              height={120}
+              width={190}
+              style={{ padding: "5px", marginLeft: "25px" }}
             />
           </Link>
         }

@@ -1,4 +1,4 @@
-import Toronto from "../images/Toronto.jpg";
+import { Button } from "primereact/button";
 
 const bgImg = {
   width: "100%",
@@ -26,25 +26,71 @@ const h3ImgStyle = {
 };
 export { bgImg, imgOnTextStyle, h1ImgStyle, h3ImgStyle };
 
-const BgText = () => {
-  return (
-    <section
-      className="background-img"
-      style={{
-        position: "relative",
-        textAlign: "center",
-      }}
-    >
-      <img src={Toronto} alt="Toronto Skyline at night" style={bgImg} />
-      {/** DISPLAYS THE TEXT ON THE IMAGES */}
-      <div className="textOnImg" style={imgOnTextStyle}>
-        <h1 style={h1ImgStyle}>Grab Toronto by the handlebars</h1>
-        <h3 style={h3ImgStyle}>
-          Immerse yourself in the noise of the Scotiabank Arena, the glow of the
-          CN Tower to the neon of Nathan Phillips Square.
-        </h3>
-      </div>
-    </section>
-  );
+const BackgText = (props) => {
+  let include = props.includeButtons;
+  if (include) {
+    return (
+      <section
+        className="background-img"
+        style={{
+          position: "relative",
+          textAlign: "center",
+        }}
+      >
+        <img src={props.bgimg} alt={props.bgalt} style={bgImg} />
+        {/** DISPLAYS THE TEXT ON THE IMAGES */}
+        <div className="textOnImg" style={imgOnTextStyle}>
+          <h1 style={h1ImgStyle}>{props.TitleText}</h1>
+          <h3 style={h3ImgStyle}>{props.TitleSub}</h3>
+          <div
+            className="Reg-Guest-btns"
+            style={{ transform: "translate(-2%, 0%)" }}
+          >
+            <Button
+              className="p-button-help"
+              label="Become a Go-Getter"
+              style={{
+                fontFamily: "Gotham Light",
+                fontSize: "1.2rem",
+                transform: "translate(-15%, 30px)",
+                borderRadius: "50px",
+                width: "250px",
+                animation: "fadein 2.5s",
+              }}
+            />
+            <Button
+              className="p-button-success"
+              label="Continue as Guest"
+              style={{
+                fontFamily: "Gotham Light",
+                fontSize: "1.2rem",
+                transform: "translate(15%, 30px)",
+                borderRadius: "50px",
+                width: "220px",
+                animation: "fadein 2.5s",
+              }}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  } else {
+    return (
+      <section
+        className="background-img"
+        style={{
+          position: "relative",
+          textAlign: "center",
+        }}
+      >
+        <img src={props.bgimg} alt={props.bgalt} style={bgImg} />
+        {/** DISPLAYS THE TEXT ON THE IMAGES */}
+        <div className="textOnImg" style={imgOnTextStyle}>
+          <h1 style={h1ImgStyle}>{props.TitleText}</h1>
+          <h3 style={h3ImgStyle}>{props.TitleSub}</h3>
+        </div>
+      </section>
+    );
+  }
 };
-export default BgText;
+export default BackgText;
