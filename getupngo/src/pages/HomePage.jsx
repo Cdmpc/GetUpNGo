@@ -30,9 +30,6 @@ export default function HomePage() {
           TitleSub="Immerse yourself in the noise of the Scotiabank Arena, the glow of the CN Tower to the neon of Nathan Phillips Square."
         />
       </div>
-      <div className="backend-test">
-        <p>{apiRep}</p>
-      </div>
     </React.Fragment>
   );
 }

@@ -12,7 +12,7 @@ export default function LoginPage() {
       <img
         src={CrossWalk}
         alt="A crosswalk with a bike painted on the road"
-        style={bgImg}
+        style={{ ...bgImg, height: "800px" }}
       />
     </React.Fragment>
   );
