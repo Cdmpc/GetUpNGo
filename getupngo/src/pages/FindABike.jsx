@@ -60,7 +60,18 @@ export default function FindABike() {
         />
       </div>
       <div className="interactive-map m-5">
-        <h1 style={{ marginBottom: "40px" }}>Find a Station Below</h1>
+        <h1
+          style={{
+            marginTop: "65px",
+            marginBottom: "40px",
+            fontFamily: "Gotham Light",
+            fontSize: "70px",
+            color: "#0ec962",
+            animation: "fadeinup 2.0s",
+          }}
+        >
+          Find a Station Below
+        </h1>
         <ReactGLMap
           initialViewState={{
             latitude: 43.6534733,
@@ -73,6 +84,7 @@ export default function FindABike() {
             height: "70vh",
             marginLeft: "auto",
             marginRight: "auto",
+            animation: "fadein 3.0s",
           }}
           mapStyle="mapbox://styles/mapbox/streets-v9"
           mapboxAccessToken="pk.eyJ1IjoiY2FkYW1vcGkiLCJhIjoiY2xnNnhoeXY1MGhudzNmbjU0ZDMyYWV4ZCJ9.0VomXaNMrZkMyWBuoR53Og"
