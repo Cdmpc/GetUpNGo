@@ -10,6 +10,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Pricing from "./pages/Pricing";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
+import FindABike from "./pages/FindABike";
 
 function App() {
   /** ROUTES RENDER THE COMPONENT IN ELEMENT, IF THE PATH URL ATTRIBUTE MATCHES. */
@@ -21,6 +22,7 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/findabike" element={<FindABike />} />
       </Routes>
     </div>
   );

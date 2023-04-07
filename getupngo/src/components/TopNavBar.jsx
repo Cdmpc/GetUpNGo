@@ -1,4 +1,4 @@
-import div from "react";
+import React from "react";
 import GGLogo from "../images/GGLogo.png";
 import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
@@ -23,13 +23,14 @@ const NavBarItems = [
     label: "Find a bike",
     icon: "pi pi-search",
     style: { fontFamily: "Gotham Light", fontSize: "20px" },
+    url: "/findabike",
   },
 ];
 
 const TopNavBar = () => {
   let nav = useNavigate();
   return (
-    <div.Fragment>
+    <React.Fragment>
       <Menubar
         style={{
           padding: "15px",
@@ -57,6 +58,7 @@ const TopNavBar = () => {
                 borderRadius: "50px",
                 fontFamily: "Gotham Light",
               }}
+              onClick={() => nav("/signup")}
             />
             <Button
               className="p-button-primary"
@@ -72,7 +74,7 @@ const TopNavBar = () => {
           </div>
         }
       />
-    </div.Fragment>
+    </React.Fragment>
   );
 };
 export default TopNavBar;
