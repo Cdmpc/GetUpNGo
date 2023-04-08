@@ -21,10 +21,9 @@ RepoDir> npm install react-transition-group --save
 RepoDir> npm install --save react-map-gl
 
 /** For the backend **/
-RepoDir> npx express-generator ggbackend
-ggbackend> npm install --save cors
-ggbackend> npm install
-ggbackend> npm start /** This starts opening the port for the server **/
+BackEndDir> npm init -y
+BackEndDir> npm i express nodemon cors body-parser mysql
+
 
 ```
 
