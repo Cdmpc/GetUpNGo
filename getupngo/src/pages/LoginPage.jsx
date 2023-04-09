@@ -26,7 +26,7 @@ export default function LoginPage() {
               icon="pi pi-arrow-left"
               severity="help"
               className="border-circle flex"
-              onClick={() => nav(-1)}
+              onClick={() => nav("/")}
             />
             <Link to="/">
               <img

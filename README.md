@@ -21,9 +21,14 @@ RepoDir> npm install react-transition-group --save
 RepoDir> npm install --save react-map-gl
 
 /** For the backend **/
-BackEndDir> npm init -y
-BackEndDir> npm i express nodemon cors body-parser mysql
+ggbackend> npm init -y
+ggbackend> npm i express nodemon cors body-parser mysql
 
+/** Nodemon Allows the server to change messages on refresh rather than restarting and reopening the server */
+ggbackend> npm start
+
+/** ON THE FRONT END DIRECTORY INSTALL AXIOS **/
+getupngo> npm i axios
 
 ```
 

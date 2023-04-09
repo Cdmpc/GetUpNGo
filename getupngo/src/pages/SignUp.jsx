@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import Rider2 from "../images/rider2.jpg";
 import GGLogo from "../images/GGLogo.png";
 import { InputText } from "primereact/inputtext";
@@ -7,6 +8,21 @@ import { bgImg } from "../components/BgText";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
+  const [newEmail, setNewEmail] = useState("");
+  const [newUser, setNewUser] = useState("");
+  const [newPass, setNewPass] = useState("");
+
+  const registerUser = () => {
+    Axios.post("http://localhost:4000/registerUser", {
+      webID: 1,
+      Username: newUser,
+      Pass: newPass,
+      email: newEmail,
+    }).then(() => {
+      alert("User successfully created!");
+    });
+  };
+
   let nav = useNavigate();
   return (
     <React.Fragment>
@@ -18,7 +34,7 @@ export default function SignUpPage() {
         />
         {/** This is the white box, everything underneath the div will be rendered inside of it. */}
         <div
-          className="surface-card p-6 shadow-6 border-round-3xl lg:w-5 absolute"
+          className="surface-card p-5 shadow-6 border-round-3xl lg:w-5 absolute"
           style={{ animation: "fadeinup 1.1s" }}
         >
           <div className="text-center mb-5">
@@ -26,7 +42,7 @@ export default function SignUpPage() {
               icon="pi pi-arrow-left"
               severity="help"
               className="border-circle flex"
-              onClick={() => nav(-1)}
+              onClick={() => nav("/")}
             />
             <Link to="/">
               <img
@@ -59,6 +75,9 @@ export default function SignUpPage() {
               type="text"
               placeholder="Email"
               className="w-full mb-3"
+              onChange={(e) => {
+                setNewEmail(e.target.value);
+              }}
             />
 
             <label
@@ -72,6 +91,9 @@ export default function SignUpPage() {
               type="text"
               placeholder="Username"
               className="w-full mb-3"
+              onChange={(e) => {
+                setNewUser(e.target.value);
+              }}
             />
 
             <label
@@ -85,6 +107,9 @@ export default function SignUpPage() {
               type="password"
               placeholder="Password"
               className="w-full mb-5"
+              onChange={(e) => {
+                setNewPass(e.target.value);
+              }}
             />
 
             <Button
@@ -93,6 +118,7 @@ export default function SignUpPage() {
               className="w-5"
               rounded
               severity="danger"
+              onClick={registerUser}
             />
           </div>
         </div>
