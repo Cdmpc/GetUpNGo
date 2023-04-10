@@ -10,8 +10,8 @@ import bike1 from "../images/bike1.jpg";
 import rider from "../images/rider.jpg";
 import { stepsStyle } from "./HowItWorks.jsx";
 import NPS from "../images/NPS.jpg";
-import mainRed from "../App";
 import { Button } from "primereact/button";
+import { useNavigate } from "react-router-dom";
 
 const passList = [
   {
@@ -24,6 +24,7 @@ const passList = [
     img: bike1,
     alt: "A bicycle docking station",
     linkText: "Purchase Guest Pass",
+    link: "",
   },
   {
     key: 2,
@@ -35,10 +36,12 @@ const passList = [
     img: rider,
     alt: "Person riding a bike",
     linkText: "Become a Go-Getter",
+    link: "/signup",
   },
 ];
 
 export default function Pricing() {
+  let nav = useNavigate();
   return (
     <React.Fragment>
       <TopNavBar />
@@ -75,7 +78,7 @@ export default function Pricing() {
               display: "inline-block",
               textAlign: "center",
               width:
-                "600px" /* AS A RULE OF THUMB THIS WIDTH SHOULD BE AROUND DOUBLE THE HEIGHT */,
+                "600px" /* AS A RULE OF THUMB THIS WIDTH SHOULD BE AROUND DOUBLE THE HEIGHT OF THE IMAGES BELOW */,
             }}
           >
             <img
@@ -86,6 +89,7 @@ export default function Pricing() {
                 width: "500px",
                 height: "300px",
                 marginTop: "30px",
+                borderRadius: "8%",
               }}
             />
             <figcaption
@@ -122,14 +126,15 @@ export default function Pricing() {
                 fontFamily: "Gotham Light",
                 textDecoration: "underline",
               }}
+              onClick={() => nav(pass.link)}
               link
             />
             <figcaption
               className="mem-rate mt-5"
               style={{
                 fontSize: "20px",
-                fontFamily: "Gotham",
-                color: "var(--pink-400)",
+                fontFamily: "Gotham Black",
+                color: "var(--pink-500)",
               }}
             >
               {pass.membershipCost}

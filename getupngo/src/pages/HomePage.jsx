@@ -4,18 +4,6 @@ import TopNavBar from "../components/TopNavBar";
 import BackgText from "../components/BgText.jsx";
 
 export default function HomePage() {
-  const [apiRep, setAPIRep] = useState("");
-
-  const callAPI = () => {
-    fetch("http://localhost:9000/testAPI")
-      .then((res) => res.text())
-      .then((res) => setAPIRep(res));
-  };
-
-  useEffect(() => {
-    callAPI();
-  }, []);
-
   return (
     <React.Fragment>
       <div className="nav-bar">

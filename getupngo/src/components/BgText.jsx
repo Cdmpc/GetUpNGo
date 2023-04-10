@@ -1,9 +1,10 @@
 import { Button } from "primereact/button";
+import { useNavigate } from "react-router-dom";
 
 const bgImg = {
   width: "100%",
-  height: "750px",
-  filter: "brightness(50%)",
+  height: "800px",
+  filter: "brightness(42%)",
 };
 
 const imgOnTextStyle = {
@@ -27,6 +28,7 @@ const h3ImgStyle = {
 export { bgImg, imgOnTextStyle, h1ImgStyle, h3ImgStyle };
 
 const BackgText = (props) => {
+  let nav = useNavigate();
   let include = props.includeButtons;
   if (include) {
     return (
@@ -44,7 +46,7 @@ const BackgText = (props) => {
           <h3 style={h3ImgStyle}>{props.TitleSub}</h3>
           <div className="Reg-Guest-btns flex flex-wrap justify-content-center gap-5 mt-5">
             <Button
-              className="p-button-help"
+              className="p-button-help translate-y-100"
               label="Become a Go-Getter"
               style={{
                 fontFamily: "Gotham Light",
@@ -53,9 +55,10 @@ const BackgText = (props) => {
                 width: "250px",
                 animation: "fadein 2.5s",
               }}
+              onClick={() => nav("/signup")}
             />
             <Button
-              className="p-button-success"
+              className="p-button-success translate-y-100"
               label="Continue as Guest"
               style={{
                 fontFamily: "Gotham Light",

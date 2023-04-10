@@ -15,12 +15,24 @@ This project uses the UI Library PrimeReact which can be found here:
 ### To start the project: you must first install this library and make sure you have Node.js in order for React to work.
 
 ```
-npm install primereact --save
-npm install primeicons --save
-npm install react-transition-group --save
+RepoDir> npm install primereact --save
+RepoDir> npm install primeicons --save
+RepoDir> npm install react-transition-group --save
+RepoDir> npm install --save react-map-gl
+
+/** For the backend **/
+ggbackend> npm init -y
+ggbackend> npm i express nodemon cors body-parser mysql
+
+/** Nodemon Allows the server to change messages on refresh rather than restarting and reopening the server */
+ggbackend> npm start
+
+/** ON THE FRONT END DIRECTORY INSTALL AXIOS **/
+getupngo> npm i axios
+
 ```
 
-### To run GetUp'N'Go
+### To run GetUp'N'Go FrontEnd
 
 1. Clone this repository onto your local machine that supports Git.
 2. Go to the getupngo directory via:
