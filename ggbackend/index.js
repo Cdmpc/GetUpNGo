@@ -79,6 +79,7 @@ app.get("/login", (req, res) => {
     res.send({ loggedIn: false });
   }
 });
+
 app.post("/login", (req, res) => {
   var username = req.body.Username;
   var password = req.body.Pass;
@@ -96,6 +97,44 @@ app.post("/login", (req, res) => {
           message: "Username or password is incorrect or non-existent!",
         });
       }
+    }
+  });
+});
+
+/** GET BIKE INFORMATION */
+app.get("/bikes", (req, res) => {
+  var sqlGetBikes = "select * from bike;";
+  db.query(sqlGetBikes, (err, tups) => {
+    if (err) {
+      res.send({ error: err });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+
+/** GET BIKE STORAGE INFORMATION IN TOTAL. */
+app.get("/bikeStore", (req, res) => {
+  let sqlStoredBikes = "select * from stores;";
+  db.query(sqlStoredBikes, (err, tups) => {
+    if (err) {
+      res.send({ err: err });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+
+/** STORE QUERY FROM FE TO BE */
+app.post("/bikeStore", (req, res) => {
+  let sqlGetBikesInStation =
+    "select s.license_plate_no from stores as s where StationID = ?;";
+  let stationID = req.body.stationID;
+  db.query(sqlGetBikesInStation, [stationID], (err, tups) => {
+    if (err) {
+      res.send({ message: "Query for getting bikes from station failed!" });
+    } else {
+      res.send(tups);
     }
   });
 });

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopNavBar from "../components/TopNavBar";
 import BackgText from "../components/BgText";
@@ -47,7 +47,20 @@ const bikeStations = [
 ];
 
 export default function FindABike(props) {
-  let nav = useNavigate();
+  /** PASS MYSQL DATA TO THE FE */
+  const [store, setStore] = useState([]);
+  const [currentStation, setCurrentStation] = useState();
+
+  const seeBikesInStation = (StationID) => {
+    axios
+      .post("http://localhost:4000/bikeStore", {
+        stationID: StationID,
+      })
+      .then((response) => {
+        setStore(response.data);
+      });
+  };
+
   return (
     <React.Fragment>
       <TopNavBar />
@@ -115,10 +128,48 @@ export default function FindABike(props) {
                   (20 - station.Quantity)
                 }
                 tooltipOptions={{ position: "top" }}
+                onClick={() => {
+                  seeBikesInStation(station.ST_ID);
+                  setCurrentStation(station.ST_ID);
+                }}
               />
             </Marker>
           ))}
         </ReactGLMap>
+      </div>
+      <div>
+        <h1
+          style={{
+            marginTop: "65px",
+            marginBottom: "40px",
+            fontFamily: "Gotham Light",
+            fontSize: "70px",
+            color: "#0ec962",
+            animation: "fadeinup 2.0s",
+          }}
+        >
+          Bikes Stored in Station {currentStation}:
+        </h1>
+        <div>
+          <table className="table table-bordered">
+            <tr>
+              <th>Bike License Plate Number</th>
+              <th>Station ID</th>
+            </tr>
+
+            {store.map((bike) => (
+              <tr key={bike.StationID}>
+                <td>{bike.license_plate_no}</td>
+                <td>
+                  <Button
+                    label="Rent this bike!"
+                    style={{ borderRadius: "50px" }}
+                  />
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </div>
     </React.Fragment>
   );
