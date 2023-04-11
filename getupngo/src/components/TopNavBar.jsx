@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GGLogo from "../images/GGLogo.png";
 import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
@@ -29,12 +29,18 @@ const NavBarItems = [
   },
 ];
 
-const TopNavBar = (props) => {
-  let isLoggedIn = props.isLoggedInProp;
+const TopNavBar = () => {
   let nav = useNavigate();
-  if (!isLoggedIn) {
-    return (
-      <React.Fragment>
+  let isLoggedIn = window.localStorage.getItem("loginStat");
+
+  const logout = () => {
+    window.localStorage.clear();
+    nav("/");
+  };
+
+  return (
+    <React.Fragment>
+      {!isLoggedIn ? (
         <Menubar
           style={{
             padding: "15px",
@@ -79,11 +85,7 @@ const TopNavBar = (props) => {
             </div>
           }
         />
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <React.Fragment>
+      ) : (
         <Menubar
           style={{
             padding: "15px",
@@ -105,28 +107,28 @@ const TopNavBar = (props) => {
           end={
             <div className="flex flex-wrap justify-content-center gap-4">
               <Avatar
-                icon="pi pi-user"
                 size="large"
-                style={{ backgroundColor: "#2196F3", color: "#ffffff" }}
                 shape="circle"
+                icon="pi pi-user"
+                style={{ backgroundColor: "#2196F3", color: "white" }}
               />
               <Button
                 className="p-button-primary"
-                icon="pi pi-sign-out"
                 label="Logout"
+                icon="pi pi-sign-out"
                 style={{
                   borderRadius: "50px",
                   fontFamily: "Gotham Light",
                 }}
                 onClick={() => {
-                  nav("/login");
+                  logout();
                 }}
               />
             </div>
           }
         />
-      </React.Fragment>
-    );
-  }
+      )}
+    </React.Fragment>
+  );
 };
 export default TopNavBar;

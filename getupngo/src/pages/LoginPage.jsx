@@ -35,22 +35,16 @@ export default function LoginPage() {
     }).then((response) => {
       if (response.data.message) {
         /** Login FAILED! */
-        setLoginStatus(false);
+        window.localStorage.setItem("loginStat", false);
         showToast("Login failed!");
       } else {
         /** Login credentials match */
-        setLoginStatus(true);
+        window.localStorage.setItem("loginStat", true);
         nav("/");
       }
     });
   };
 
-  /** Happens everytime we refresh the page. Keep login true per the cookie request. */
-  useEffect(() => {
-    Axios.get("http://localhost:4000/login").then((response) => {
-      setLoginStatus(true);
-    });
-  }, []);
   return (
     <React.Fragment>
       <div className="flex align-items-center justify-content-center">
@@ -135,7 +129,6 @@ export default function LoginPage() {
               }}
             />
             <Toast ref={toast} />
-            <p>{"Login persistent: " + loginStatus}</p>
           </div>
         </div>
       </div>
