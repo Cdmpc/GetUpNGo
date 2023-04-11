@@ -50,6 +50,7 @@ export default function FindABike(props) {
   /** PASS MYSQL DATA TO THE FE */
   const [store, setStore] = useState([]);
   const [currentStation, setCurrentStation] = useState();
+  const [tableVisible, setTableVisible] = useState("hidden");
 
   const seeBikesInStation = (StationID) => {
     axios
@@ -60,6 +61,8 @@ export default function FindABike(props) {
         setStore(response.data);
       });
   };
+
+  let nav = useNavigate();
 
   return (
     <React.Fragment>
@@ -131,6 +134,7 @@ export default function FindABike(props) {
                 onClick={() => {
                   seeBikesInStation(station.ST_ID);
                   setCurrentStation(station.ST_ID);
+                  setTableVisible("visible");
                 }}
               />
             </Marker>
@@ -146,6 +150,7 @@ export default function FindABike(props) {
             fontSize: "70px",
             color: "#0ec962",
             animation: "fadeinup 2.0s",
+            visibility: tableVisible,
           }}
         >
           Bikes Stored in Station {currentStation}:
@@ -153,7 +158,12 @@ export default function FindABike(props) {
         <div>
           <table
             className="table table-bordered"
-            style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}
+            style={{
+              width: "50%",
+              marginLeft: "auto",
+              marginRight: "auto",
+              visibility: tableVisible,
+            }}
           >
             <tr>
               <th>Bike License Plate Number</th>
@@ -171,6 +181,7 @@ export default function FindABike(props) {
                       fontFamily: "Gotham Light",
                       fontSize: "13.5px",
                     }}
+                    onClick={() => nav("/checkout")}
                   />
                 </td>
               </tr>

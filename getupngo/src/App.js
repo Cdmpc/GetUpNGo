@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
 import FindABike from "./pages/FindABike";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/findabike" element={<FindABike />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </div>
   );
