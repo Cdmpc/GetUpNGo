@@ -151,10 +151,13 @@ export default function FindABike(props) {
           Bikes Stored in Station {currentStation}:
         </h1>
         <div>
-          <table className="table table-bordered">
+          <table
+            className="table table-bordered"
+            style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}
+          >
             <tr>
               <th>Bike License Plate Number</th>
-              <th>Station ID</th>
+              <th>Rent</th>
             </tr>
 
             {store.map((bike) => (
@@ -163,7 +166,11 @@ export default function FindABike(props) {
                 <td>
                   <Button
                     label="Rent this bike!"
-                    style={{ borderRadius: "50px" }}
+                    style={{
+                      borderRadius: "50px",
+                      fontFamily: "Gotham Light",
+                      fontSize: "13.5px",
+                    }}
                   />
                 </td>
               </tr>
