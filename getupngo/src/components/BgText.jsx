@@ -81,6 +81,7 @@ const BackgText = (props) => {
                 width: "250px",
                 animation: "fadein 2.5s",
               }}
+              onClick={() => nav("/findabike")}
             />
           </div>
         </div>
