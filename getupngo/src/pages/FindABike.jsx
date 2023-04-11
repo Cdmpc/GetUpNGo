@@ -5,6 +5,7 @@ import BackgText from "../components/BgText";
 import Brem from "../images/bremner.jpg";
 import ReactGLMap, { Marker, Popup } from "react-map-gl";
 import { Button } from "primereact/button";
+import axios from "axios";
 
 /** We will have to dynamically change the Quantity property as it interacts with the DB. */
 const bikeStations = [
@@ -45,7 +46,7 @@ const bikeStations = [
   },
 ];
 
-export default function FindABike() {
+export default function FindABike(props) {
   let nav = useNavigate();
   return (
     <React.Fragment>

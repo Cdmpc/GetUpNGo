@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Toronto from "../images/Toronto.jpg";
 import TopNavBar from "../components/TopNavBar";
 import BackgText from "../components/BgText.jsx";
+import axios from "axios";
 
-export default function HomePage() {
+export default function HomePage(props) {
   return (
     <React.Fragment>
       <div className="nav-bar">

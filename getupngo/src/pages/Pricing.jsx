@@ -12,6 +12,7 @@ import { stepsStyle } from "./HowItWorks.jsx";
 import NPS from "../images/NPS.jpg";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const passList = [
   {
@@ -40,7 +41,7 @@ const passList = [
   },
 ];
 
-export default function Pricing() {
+export default function Pricing(props) {
   let nav = useNavigate();
   return (
     <React.Fragment>

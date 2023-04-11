@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "primereact/resources/themes/lara-light-teal/theme.css"; //theme
@@ -14,7 +14,6 @@ import SignUpPage from "./pages/SignUp";
 import FindABike from "./pages/FindABike";
 
 function App() {
-  /** ROUTES RENDER THE COMPONENT IN ELEMENT, IF THE PATH URL ATTRIBUTE MATCHES. */
   return (
     <div className="App">
       <Routes>

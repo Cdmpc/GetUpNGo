@@ -2,17 +2,11 @@ import React from "react";
 import TopNavBar from "../components/TopNavBar";
 import Eaton from "../images/eaton.jpg";
 import BackgText from "../components/BgText";
-import {
-  bgImg,
-  imgOnTextStyle,
-  h1ImgStyle,
-  h3ImgStyle,
-} from "../components/BgText";
 import Step1 from "../images/Step1.jpg";
 import Step2 from "../images/Step2.jpg";
 import Step3 from "../images/Step3.jpg";
 import Step4 from "../images/Step4.jpg";
-import { Margin } from "@mui/icons-material";
+import axios from "axios";
 
 const stepsStyle = {
   width: "200px",
@@ -64,7 +58,7 @@ const steps = [
   },
 ];
 
-export default function HowItWorks() {
+export default function HowItWorks(props) {
   return (
     <React.Fragment>
       <div className="nav-bar">
