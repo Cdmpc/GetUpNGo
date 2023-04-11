@@ -71,12 +71,12 @@ app.post("/registerUser", (req, res) => {
   );
 });
 
-/** LOGIN CONNECTION TO DB AND CHECKING. */
+/** MAKE A SERVER REQUEST TO SEE IF THE USER IS STILL LOGGED IN OR NOT. */
 app.get("/login", (req, res) => {
   if (req.session.user) {
-    res.send({ isLoggedIn: true, user: req.session.user });
+    res.send({ loggedIn: true, user: req.session.user });
   } else {
-    res.send({ isLoggedIn: false });
+    res.send({ loggedIn: false });
   }
 });
 app.post("/login", (req, res) => {
@@ -90,7 +90,6 @@ app.post("/login", (req, res) => {
     } else {
       if (tups.length > 0) {
         req.session.user = tups;
-        console.log(req.session.user);
         res.send(tups);
       } else {
         res.send({

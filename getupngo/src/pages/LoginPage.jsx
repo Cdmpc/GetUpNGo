@@ -36,20 +36,19 @@ export default function LoginPage() {
       if (response.data.message) {
         /** Login FAILED! */
         setLoginStatus(false);
-        showToast(response.data.message);
+        showToast("Login failed!");
       } else {
         /** Login credentials match */
         setLoginStatus(true);
-        //nav("/");
+        nav("/");
       }
     });
   };
 
+  /** Happens everytime we refresh the page. Keep login true per the cookie request. */
   useEffect(() => {
     Axios.get("http://localhost:4000/login").then((response) => {
-      if (response.data.isLoggedIn == true) {
-        setLoginStatus(true);
-      }
+      setLoginStatus(true);
     });
   }, []);
   return (
