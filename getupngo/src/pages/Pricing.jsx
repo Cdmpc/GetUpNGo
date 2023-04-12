@@ -25,7 +25,7 @@ const passList = [
     img: bike1,
     alt: "A bicycle docking station",
     linkText: "Purchase Guest Pass",
-    link: "",
+    link: "/findabike",
   },
   {
     key: 2,

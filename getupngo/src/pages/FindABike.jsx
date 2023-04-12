@@ -175,13 +175,19 @@ export default function FindABike(props) {
                 <td>{bike.license_plate_no}</td>
                 <td>
                   <Button
-                    label="Rent this bike!"
+                    label="Rent this bike !"
                     style={{
                       borderRadius: "50px",
                       fontFamily: "Gotham Light",
                       fontSize: "13.5px",
                     }}
-                    onClick={() => nav("/checkout")}
+                    onClick={() => {
+                      nav("/checkout");
+                      window.localStorage.setItem(
+                        "Bike_Rented",
+                        bike.license_plate_no
+                      );
+                    }}
                   />
                 </td>
               </tr>
