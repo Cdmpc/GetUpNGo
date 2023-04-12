@@ -1,6 +1,6 @@
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "primereact/resources/themes/lara-light-teal/theme.css"; //theme
@@ -12,9 +12,9 @@ import Pricing from "./pages/Pricing";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUp";
 import FindABike from "./pages/FindABike";
+import Checkout from "./pages/Checkout";
 
 function App() {
-  /** ROUTES RENDER THE COMPONENT IN ELEMENT, IF THE PATH URL ATTRIBUTE MATCHES. */
   return (
     <div className="App">
       <Routes>
@@ -24,6 +24,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/findabike" element={<FindABike />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </div>
   );

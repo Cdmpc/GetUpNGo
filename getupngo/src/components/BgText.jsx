@@ -58,8 +58,9 @@ const BackgText = (props) => {
               onClick={() => nav("/signup")}
             />
             <Button
-              className="p-button-success translate-y-100"
-              label="Continue as Guest"
+              className="p-button-primary translate-y-100"
+              label="Log In"
+              icon="pi pi-sign-in"
               style={{
                 fontFamily: "Gotham Light",
                 fontSize: "1.2rem",
@@ -67,6 +68,20 @@ const BackgText = (props) => {
                 width: "250px",
                 animation: "fadein 2.5s",
               }}
+              onClick={() => nav("/login")}
+            />
+            <Button
+              className="p-button-success translate-y-100"
+              label="Continue as Guest"
+              icon="pi pi-user"
+              style={{
+                fontFamily: "Gotham Light",
+                fontSize: "1.2rem",
+                borderRadius: "50px",
+                width: "250px",
+                animation: "fadein 2.5s",
+              }}
+              onClick={() => nav("/findabike")}
             />
           </div>
         </div>

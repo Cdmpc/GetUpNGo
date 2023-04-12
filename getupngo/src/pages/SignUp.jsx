@@ -11,6 +11,7 @@ export default function SignUpPage() {
   const [newEmail, setNewEmail] = useState("");
   const [newUser, setNewUser] = useState("");
   const [newPass, setNewPass] = useState("");
+  let nav = useNavigate();
 
   const registerUser = () => {
     Axios.post("http://localhost:4000/registerUser", {
@@ -18,12 +19,16 @@ export default function SignUpPage() {
       Username: newUser,
       Pass: newPass,
       email: newEmail,
-    }).then(() => {
-      alert("User successfully created!");
+      isLoggedIn: 0,
+    }).then((response) => {
+      if (response.data.message) {
+        alert(response.data.message);
+      } else {
+        nav("/login");
+      }
     });
   };
 
-  let nav = useNavigate();
   return (
     <React.Fragment>
       <div className="flex align-items-center justify-content-center">
@@ -118,7 +123,9 @@ export default function SignUpPage() {
               className="w-5"
               rounded
               severity="danger"
-              onClick={registerUser}
+              onClick={() => {
+                registerUser();
+              }}
             />
           </div>
         </div>

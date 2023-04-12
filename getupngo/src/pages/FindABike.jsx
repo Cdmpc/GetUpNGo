@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopNavBar from "../components/TopNavBar";
 import BackgText from "../components/BgText";
 import Brem from "../images/bremner.jpg";
 import ReactGLMap, { Marker, Popup } from "react-map-gl";
 import { Button } from "primereact/button";
+import axios from "axios";
 
 /** We will have to dynamically change the Quantity property as it interacts with the DB. */
 const bikeStations = [
@@ -45,8 +46,24 @@ const bikeStations = [
   },
 ];
 
-export default function FindABike() {
+export default function FindABike(props) {
+  /** PASS MYSQL DATA TO THE FE */
+  const [store, setStore] = useState([]);
+  const [currentStation, setCurrentStation] = useState();
+  const [tableVisible, setTableVisible] = useState("hidden");
+
+  const seeBikesInStation = (StationID) => {
+    axios
+      .post("http://localhost:4000/bikeStore", {
+        stationID: StationID,
+      })
+      .then((response) => {
+        setStore(response.data);
+      });
+  };
+
   let nav = useNavigate();
+
   return (
     <React.Fragment>
       <TopNavBar />
@@ -114,10 +131,63 @@ export default function FindABike() {
                   (20 - station.Quantity)
                 }
                 tooltipOptions={{ position: "top" }}
+                onClick={() => {
+                  seeBikesInStation(station.ST_ID);
+                  setCurrentStation(station.ST_ID);
+                  setTableVisible("visible");
+                }}
               />
             </Marker>
           ))}
         </ReactGLMap>
+      </div>
+      <div>
+        <h1
+          style={{
+            marginTop: "65px",
+            marginBottom: "40px",
+            fontFamily: "Gotham Light",
+            fontSize: "70px",
+            color: "#0ec962",
+            animation: "fadeinup 2.0s",
+            visibility: tableVisible,
+          }}
+        >
+          Bikes Stored in Station {currentStation}:
+        </h1>
+        <div>
+          <table
+            className="table table-bordered"
+            style={{
+              width: "50%",
+              marginLeft: "auto",
+              marginRight: "auto",
+              visibility: tableVisible,
+            }}
+          >
+            <tr>
+              <th>Bike License Plate Number</th>
+              <th>Rent</th>
+            </tr>
+
+            {store.map((bike) => (
+              <tr key={bike.StationID}>
+                <td>{bike.license_plate_no}</td>
+                <td>
+                  <Button
+                    label="Rent this bike!"
+                    style={{
+                      borderRadius: "50px",
+                      fontFamily: "Gotham Light",
+                      fontSize: "13.5px",
+                    }}
+                    onClick={() => nav("/checkout")}
+                  />
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </div>
     </React.Fragment>
   );
