@@ -62,18 +62,23 @@ app.post("/registerUser", (req, res) => {
   var isLoggedIn = req.body.isLoggedIn;
 
   var sqlRegister =
-    "insert into members (WebID, Username, Pass, email, isLoggedIn) values (?, ?, ?, ?, ?);";
+    "insert into members (WebID, Username, Pass, email) values (?, ?, ?, ?);";
   db.query(
     sqlRegister,
     [WebID, Username, Pass, email, isLoggedIn],
     (err, tups) => {
-      if (tups) {
-        res.send(tups);
-      } else {
+      if (err) {
         res.send({ message: "Registration query failed" });
       }
     }
   );
+  var updateUserCount =
+    "update website set no_of_users = (no_of_users) + 1 where WebID = 1";
+  db.query(updateUserCount, (err, tups) => {
+    if (err) {
+      res.send({ message: "Registration query failed" });
+    }
+  });
 });
 
 /** MAKE A SERVER REQUEST TO SEE IF THE USER IS STILL LOGGED IN OR NOT. */
@@ -199,6 +204,29 @@ app.post("/payment", cors(), async (req, res) => {
       success: false,
     });
   }
+});
+
+app.get("/bikeCounting", (req, res) => {
+  var getBikeCount =
+    "select s.StationID, COUNT(b.license_plate_no) as bikeCount from stores as s, bike as b where s.license_plate_no = b.license_plate_no and availability = 1 group by s.StationID;";
+  db.query(getBikeCount, (err, tups) => {
+    if (err) {
+      res.send({ error: "Error getting query" });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+app.post("/bikeCounting", (req, res) => {
+  var getBikeCount =
+    "select s.StationID, COUNT(b.license_plate_no) as bikeCount from stores as s, bike as b where s.license_plate_no = b.license_plate_no and availability = 1 group by s.StationID;";
+  db.query(getBikeCount, (err, tups) => {
+    if (err) {
+      res.send({ error: "Error getting query" });
+    } else {
+      res.send(tups);
+    }
+  });
 });
 
 //Listen on given port

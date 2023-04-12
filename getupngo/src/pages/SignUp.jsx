@@ -125,6 +125,7 @@ export default function SignUpPage() {
               severity="danger"
               onClick={() => {
                 registerUser();
+                nav("/login");
               }}
             />
           </div>

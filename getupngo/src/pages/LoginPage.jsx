@@ -34,7 +34,7 @@ export default function LoginPage() {
     }).then((response) => {
       if (response.data.message) {
         /** Login FAILED! */
-        window.localStorage.setItem("loginStat", false);
+        window.localStorage.clear();
         showToast("Login failed!");
       } else {
         /** Login credentials match */

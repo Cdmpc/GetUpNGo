@@ -7,48 +7,11 @@ import ReactGLMap, { Marker, Popup } from "react-map-gl";
 import { Button } from "primereact/button";
 import axios from "axios";
 
-/** We will have to dynamically change the Quantity property as it interacts with the DB. */
-const bikeStations = [
-  {
-    ST_ID: 1,
-    Address: "123 York St SW",
-    Quantity: 5,
-    latitude: 43.64460214714695,
-    longitude: -79.38682750191234,
-  },
-  {
-    ST_ID: 2,
-    Address: "678 Maple Grove SW",
-    Quantity: 4,
-    latitude: 43.65070273636765,
-    longitude: -79.40515889822396,
-  },
-  {
-    ST_ID: 3,
-    Address: "6123 North York Blvd NE",
-    Quantity: 6,
-    latitude: 43.65049610149945,
-    longitude: -79.37304304673329,
-  },
-  {
-    ST_ID: 4,
-    Address: "9213 Scarborough Ave E",
-    Quantity: 7,
-    latitude: 43.64672213119675,
-    longitude: -79.41550319421815,
-  },
-  {
-    ST_ID: 5,
-    Address: "4891 Yonge St N",
-    Quantity: 3,
-    latitude: 43.66598220918121,
-    longitude: -79.3929150753547,
-  },
-];
-
 export default function FindABike(props) {
   /** PASS MYSQL DATA TO THE FE */
   const [store, setStore] = useState([]);
+  /** PREVENTS THE UNDEFINED ERROR. */
+  const [bikeCount, setBikeCount] = useState([20, 20, 20, 20, 20]);
   const [currentStation, setCurrentStation] = useState();
   const [tableVisible, setTableVisible] = useState("hidden");
 
@@ -62,7 +25,56 @@ export default function FindABike(props) {
       });
   };
 
+  /** FETCHES DATA FROM MYSQL WHEN PAGE IS RENDERED. */
+  useEffect(() => {
+    const getBikeCount = async () => {
+      const res = await fetch("http://localhost:4000/bikeCounting");
+      const getData = await res.json();
+      setBikeCount(getData);
+      console.log(bikeCount);
+    };
+    getBikeCount();
+  }, [bikeCount]);
+
   let nav = useNavigate();
+
+  const bikeStations = [
+    {
+      ST_ID: 1,
+      Address: "123 York St SW",
+      Quantity: bikeCount[0].bikeCount,
+      latitude: 43.64460214714695,
+      longitude: -79.38682750191234,
+    },
+    {
+      ST_ID: 2,
+      Address: "678 Maple Grove SW",
+      Quantity: bikeCount[1].bikeCount,
+      latitude: 43.65070273636765,
+      longitude: -79.40515889822396,
+    },
+    {
+      ST_ID: 3,
+      Address: "6123 North York Blvd NE",
+      Quantity: bikeCount[2].bikeCount,
+      latitude: 43.65049610149945,
+      longitude: -79.37304304673329,
+    },
+    {
+      ST_ID: 4,
+      Address: "9213 Scarborough Ave E",
+      Quantity: bikeCount[3].bikeCount,
+      latitude: 43.64672213119675,
+      longitude: -79.41550319421815,
+    },
+    {
+      ST_ID: 5,
+      Address: "4891 Yonge St N",
+      Quantity: bikeCount[4].bikeCount,
+      latitude: 43.66598220918121,
+      longitude: -79.3929150753547,
+    },
+  ];
 
   return (
     <React.Fragment>
