@@ -22,13 +22,17 @@ RepoDir> npm install --save react-map-gl
 
 /** For the backend **/
 ggbackend> npm init -y
-ggbackend> npm i express nodemon cors body-parser mysql
+ggbackend> npm i express nodemon cors body-parser mysql mysql2 express-session cookie-parser dotenv 
 
 /** Nodemon Allows the server to change messages on refresh rather than restarting and reopening the server */
 ggbackend> npm start
 
 /** ON THE FRONT END DIRECTORY INSTALL AXIOS **/
 getupngo> npm i axios
+
+/** INSTALLS PAYMENT INTEGRATION WITH  STRIPEJS**/
+getupngo> npm i @stripe/react-stripe-js @stripe/stripe-js
+ggbackend> npm i stripe
 
 ```
 
