@@ -12,7 +12,6 @@ import HomePage from "./HomePage";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState(false);
   const toast = useRef(null);
 
   const showToast = (error) => {
@@ -35,7 +34,7 @@ export default function LoginPage() {
     }).then((response) => {
       if (response.data.message) {
         /** Login FAILED! */
-        window.localStorage.setItem("loginStat", false);
+        window.localStorage.clear();
         showToast("Login failed!");
       } else {
         /** Login credentials match */

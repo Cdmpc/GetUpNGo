@@ -3,10 +3,14 @@ const mysql = require("mysql2");
 const app = express();
 const port = process.env.PORT || 4000;
 const cors = require("cors");
-/** PERSISTENT LOGIN LIBS */
 const bp = require("body-parser");
+/** PERSISTENT LOGIN LIBS */
 const es = require("express-session");
 const cookie = require("cookie-parser");
+
+/** STRIPE PAYMENT ADDITIONS */
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 
 /** Connect to MYSQL Database */
 const db = mysql.createPool({
@@ -25,6 +29,7 @@ app.use(
 );
 app.use(express.json());
 app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json());
 app.use(cookie());
 app.use(
   es({
@@ -57,18 +62,23 @@ app.post("/registerUser", (req, res) => {
   var isLoggedIn = req.body.isLoggedIn;
 
   var sqlRegister =
-    "insert into members (WebID, Username, Pass, email, isLoggedIn) values (?, ?, ?, ?, ?);";
+    "insert into members (WebID, Username, Pass, email) values (?, ?, ?, ?);";
   db.query(
     sqlRegister,
     [WebID, Username, Pass, email, isLoggedIn],
     (err, tups) => {
-      if (tups) {
-        res.send(tups);
-      } else {
+      if (err) {
         res.send({ message: "Registration query failed" });
       }
     }
   );
+  var updateUserCount =
+    "update website set no_of_users = (no_of_users) + 1 where WebID = 1";
+  db.query(updateUserCount, (err, tups) => {
+    if (err) {
+      res.send({ message: "Registration query failed" });
+    }
+  });
 });
 
 /** MAKE A SERVER REQUEST TO SEE IF THE USER IS STILL LOGGED IN OR NOT. */
@@ -128,11 +138,91 @@ app.get("/bikeStore", (req, res) => {
 /** STORE QUERY FROM FE TO BE */
 app.post("/bikeStore", (req, res) => {
   let sqlGetBikesInStation =
-    "select s.license_plate_no from stores as s where StationID = ?;";
+    "select b.license_plate_no from bike as b, stores as s where s.StationID = ? and b.license_plate_no = s.license_plate_no and b.availability = 1;";
   let stationID = req.body.stationID;
   db.query(sqlGetBikesInStation, [stationID], (err, tups) => {
     if (err) {
       res.send({ message: "Query for getting bikes from station failed!" });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+
+/** ADD PAYMENT REQUEST */
+app.get("/payment", cors(), (req, res) => {
+  var sqlGetBikes = "select * from bike;";
+  db.query(sqlGetBikes, (err, tups) => {
+    if (err) {
+      res.send({ error: err });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+app.post("/payment", cors(), async (req, res) => {
+  let { amount, id } = req.body;
+  let license_plate_no = req.body.license_plate_no;
+  let email = req.body.email;
+  let Fname = req.body.Fname;
+  let Lname = req.body.Lname;
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "CAD",
+      description: "GetUpNGo",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("Payment", payment);
+    res.json({
+      message: "Payment Successful!",
+      success: true,
+    });
+    let updateBikeAvailability =
+      "update bike set availability = 0 where license_plate_no = ?;";
+    db.query(updateBikeAvailability, [license_plate_no], (err, tups) => {
+      if (err) {
+        res.send({ message: "Updating bike availability failed!" });
+      }
+    });
+    let addRenter =
+      "insert into renter (license_plate_no, email, Fname, Lname) values(?, ?, ?, ?);";
+    db.query(
+      addRenter,
+      [license_plate_no, email, Fname, Lname],
+      (err, tups) => {
+        if (err) {
+          res.send({ message: "Cannot update renters!" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log("Error", error);
+    res.json({
+      message: "Payment Failed!",
+      success: false,
+    });
+  }
+});
+
+app.get("/bikeCounting", (req, res) => {
+  var getBikeCount =
+    "select s.StationID, COUNT(b.license_plate_no) as bikeCount from stores as s, bike as b where s.license_plate_no = b.license_plate_no and availability = 1 group by s.StationID;";
+  db.query(getBikeCount, (err, tups) => {
+    if (err) {
+      res.send({ error: "Error getting query" });
+    } else {
+      res.send(tups);
+    }
+  });
+});
+app.post("/bikeCounting", (req, res) => {
+  var getBikeCount =
+    "select s.StationID, COUNT(b.license_plate_no) as bikeCount from stores as s, bike as b where s.license_plate_no = b.license_plate_no and availability = 1 group by s.StationID;";
+  db.query(getBikeCount, (err, tups) => {
+    if (err) {
+      res.send({ error: "Error getting query" });
     } else {
       res.send(tups);
     }

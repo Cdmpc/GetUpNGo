@@ -7,6 +7,7 @@ import Step2 from "../images/Step2.jpg";
 import Step3 from "../images/Step3.jpg";
 import Step4 from "../images/Step4.jpg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const stepsStyle = {
   width: "200px",
@@ -34,7 +35,7 @@ const steps = [
     description:
       "Pick a station closest to your location and enter the passcode given after your purchase to unlock the bike",
     linkText: "See available stations",
-    linkTo: "/stations",
+    linkTo: "/findabike",
   },
   {
     key: 3,
@@ -43,8 +44,8 @@ const steps = [
     title: "Ride",
     description:
       "This is where the fun begins, once unlocked you can hop on and ride along!",
-    linkText: "View popular trails",
-    linkTo: "/trails",
+    linkText: "",
+    linkTo: "",
   },
   {
     key: 4,
@@ -107,6 +108,7 @@ export default function HowItWorks(props) {
             >
               {step.description}
             </figcaption>
+            <Link to={step.linkTo}>{step.linkText}</Link>
           </figure>
         ))}
       </div>
