@@ -30,6 +30,10 @@ ggbackend> npm start
 /** ON THE FRONT END DIRECTORY INSTALL AXIOS **/
 getupngo> npm i axios
 
+/** INSTALLS PAYMENT INTEGRATION WITH  STRIPEJS**/
+getupngo> npm i @stripe/react-stripe-js @stripe/stripe-js
+ggbackend> npm i stripe
+
 ```
 
 ### To run GetUp'N'Go FrontEnd
