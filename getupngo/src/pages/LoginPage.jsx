@@ -17,9 +17,9 @@ export default function LoginPage() {
   const showToast = (error) => {
     toast.current.show({
       severity: "error",
-      summary: "Error",
+      summary: "Login Error",
       detail: error,
-      life: 1000,
+      life: 2000,
     });
   };
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
       if (response.data.message) {
         /** Login FAILED! */
         window.localStorage.clear();
-        showToast("Login failed!");
+        showToast("Username of password is incorrect!");
       } else {
         /** Login credentials match */
         window.localStorage.setItem("loginStat", true);
