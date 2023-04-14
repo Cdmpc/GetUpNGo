@@ -1,6 +1,6 @@
 # GETUP'N'GO
 
-This project is a bike rental simulation created with React, and Node.js using the MySQL database hosted on XAMPP.
+This project is a bike rental simulation created with React, and Node.js using the MySQL Wokrbench GUI to visualize the Database Schema.
 Make sure you have the latest dependencies installed on React and also install BootStrap CSS:
 
 ```
