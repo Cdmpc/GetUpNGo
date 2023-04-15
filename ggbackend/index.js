@@ -72,13 +72,6 @@ app.post("/registerUser", (req, res) => {
       }
     }
   );
-  var updateUserCount =
-    "update website set no_of_users = (no_of_users) + 1 where WebID = 1";
-  db.query(updateUserCount, (err, tups) => {
-    if (err) {
-      res.send({ message: "Registration query failed" });
-    }
-  });
 });
 
 /** MAKE A SERVER REQUEST TO SEE IF THE USER IS STILL LOGGED IN OR NOT. */
